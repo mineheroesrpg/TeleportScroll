@@ -1,0 +1,6 @@
+name: TeleportScroll
+version: ${project.version}
+main: hu.sourcescode.teleportscroll.TeleportScroll
+api-version: 1.18
+authors: [ sourceSCOde ]
+description: Lightweight teleport plugin in Diablo II style.
