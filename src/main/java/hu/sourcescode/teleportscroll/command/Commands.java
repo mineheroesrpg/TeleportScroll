@@ -8,6 +8,7 @@ import hu.sourcescode.teleportscroll.TeleportScroll;
 import hu.sourcescode.teleportscroll.model.Scroll;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -25,6 +26,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Getter
@@ -126,6 +128,42 @@ public class Commands extends BaseCommand {
             ).replace("%%scrollname%%", scrollName));
         }
     }
+
+    @Subcommand("get")
+    @CommandPermission("teleportscroll.get")
+    public void getScroll(Player sender, String scrollName, String playerName) {
+        List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+        Player p;
+        if (onlinePlayers.stream().anyMatch(player -> player.getName().equalsIgnoreCase(playerName))) {
+            p = onlinePlayers.stream().filter(player -> player.getName().equalsIgnoreCase(playerName)).collect(Collectors.toList()).get(0);
+            if (main.getUtils().isScrollNameExists(scrollName)) {
+                if (p.getInventory().firstEmpty() == -1) {
+                    sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
+                            Objects.requireNonNull(main.getLang().getString("get_scroll_inventory_full_other")),
+                            sender
+                    ).replace("%%scrollname%%", scrollName));
+                } else {
+                    p.getInventory().addItem(itemBuilder(scrollName));
+                    sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
+                            Objects.requireNonNull(main.getLang().getString("get_scroll_successfull_other")),
+                            sender
+                    ).replace("%%scrollname%%", scrollName));
+                }
+            } else {
+                sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
+                        Objects.requireNonNull(main.getLang().getString("get_scroll_not_found")),
+                        sender
+                ).replace("%%scrollname%%", scrollName));
+            }
+        } else {
+            sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
+                    Objects.requireNonNull(main.getLang().getString("player_not_found")),
+                    sender
+            ).replace("%%scrollname%%", scrollName));
+        }
+
+    }
+
 
     @Subcommand("reload")
     @CommandPermission("teleportscroll.reload")

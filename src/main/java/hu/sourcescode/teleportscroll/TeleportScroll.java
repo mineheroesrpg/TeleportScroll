@@ -20,6 +20,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -120,6 +121,21 @@ public class TeleportScroll extends JavaPlugin {
         this.pluginPrefix = ChatColor.translateAlternateColorCodes(
                 '&',
                 Objects.requireNonNull(getLang().getString("prefix")));
+        if (lang.getString("player_not_found") == null) {
+            lang.set("player_not_found", "%%player%% not online.");
+        }
+        if (lang.getString("get_scroll_inventory_full_other") == null) {
+            lang.set("get_scroll_inventory_full_other", "&cThere is not enough space in %%player%%'s inventory.");
+        }
+        if (lang.getString("get_scroll_successfull_other") == null) {
+            lang.set("get_scroll_successfull_other", "&a%%scrollname%% added to %%player%%'s inventory.");
+        }
+        try {
+            lang.save(file);
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+
     }
 
     public void reload() {
