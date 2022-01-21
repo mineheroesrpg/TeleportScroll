@@ -22,6 +22,8 @@ Permission: teleportscroll.create
 Permission: teleportscroll.create
 - /tpscroll get <ID> - Gets a scroll item for the given point.
 Permission: teleportscroll.get
+- /tpscroll get <ID> <Player> - Give a scroll item with the given point to a player.
+Permission: teleportscroll.get
 - /tpscroll list - Lists all the available points.
 Permission: teleportscroll.list
 - /tpscroll reload - Reloads the config and the language file.
