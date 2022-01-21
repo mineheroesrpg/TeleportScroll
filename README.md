@@ -16,13 +16,13 @@ When the player right-clicks with the scroll, it will teleport him into the loca
 which he can use to go back to his previous location. simple isn't it?
 
 # Commands & Permissions:
-- /tpscroll create <ID> - Creates a new teleport point on your current location.
+- /tpscroll create [ID] - Creates a new teleport point on your current location.
 Permission: teleportscroll.create
-- /tpscroll delete <ID> - Deletes the given teleport point.
+- /tpscroll delete [ID] - Deletes the given teleport point.
 Permission: teleportscroll.create
-- /tpscroll get <ID> - Gets a scroll item for the given point.
+- /tpscroll get [ID] - Gets a scroll item for the given point.
 Permission: teleportscroll.get
-- /tpscroll get <ID> <Player> - Give a scroll item with the given point to a player.
+- /tpscroll get [ID] [Player] - Give a scroll item with the given point to a player.
 Permission: teleportscroll.get
 - /tpscroll list - Lists all the available points.
 Permission: teleportscroll.list
