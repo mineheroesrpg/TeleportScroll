@@ -131,7 +131,7 @@ public class Commands extends BaseCommand {
 
     @Subcommand("get")
     @CommandPermission("teleportscroll.get")
-    public void getScroll(Player sender, String scrollName, String playerName) {
+    public void getScroll(CommandSender sender, String scrollName, String playerName) {
         List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
         Player p;
         if (onlinePlayers.stream().anyMatch(player -> player.getName().equalsIgnoreCase(playerName))) {
@@ -140,25 +140,25 @@ public class Commands extends BaseCommand {
                 if (p.getInventory().firstEmpty() == -1) {
                     sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
                             Objects.requireNonNull(main.getLang().getString("get_scroll_inventory_full_other")),
-                            sender
+                            p
                     ).replace("%%scrollname%%", scrollName));
                 } else {
                     p.getInventory().addItem(itemBuilder(scrollName));
                     sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
                             Objects.requireNonNull(main.getLang().getString("get_scroll_successfull_other")),
-                            sender
+                            p
                     ).replace("%%scrollname%%", scrollName));
                 }
             } else {
                 sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
                         Objects.requireNonNull(main.getLang().getString("get_scroll_not_found")),
-                        sender
+                        p
                 ).replace("%%scrollname%%", scrollName));
             }
         } else {
             sender.sendMessage(main.getPluginPrefix() + main.getUtils().translatePlaceholders(
                     Objects.requireNonNull(main.getLang().getString("player_not_found")),
-                    sender
+                    "%%player%%", playerName
             ).replace("%%scrollname%%", scrollName));
         }
 

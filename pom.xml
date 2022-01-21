@@ -6,7 +6,7 @@
 
     <groupId>hu.sourcescode</groupId>
     <artifactId>TeleportScroll</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>TeleportScroll</name>
